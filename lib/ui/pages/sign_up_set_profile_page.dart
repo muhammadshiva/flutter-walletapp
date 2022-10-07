@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 
-import '../widgets/buttons.dart';
-
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class SignUpSetProfilePage extends StatelessWidget {
+  const SignUpSetProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,33 +42,54 @@ class SignUpPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomFormField(title: 'Full Name'),
+                  // Container(
+                  //   width: 120,
+                  //   height: 120,
+                  //   decoration: BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     color: lightBgColor,
+                  //   ),
+                  //   child: Center(
+                  //     child: Image.asset(
+                  //       'assets/ic_upload.png',
+                  //       width: 32,
+                  //       height: 32,
+                  //     ),
+                  //   ),
+                  // ),
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/img_profile.png'),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 16),
-                  const CustomFormField(title: 'Email Address'),
-                  const SizedBox(height: 16),
-                  const CustomFormField(
-                    title: 'Password',
+                  Text(
+                    'Shayana Hanna',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: medium,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  CustomFormField(
+                    title: 'Set PIN (6 digit number)',
                     obscureText: true,
                   ),
                   const SizedBox(height: 30),
                   CustomFilledButton(
                     title: 'Continue',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up-set-profile');
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 50),
-            CustomTextButton(
-              title: 'Sign In',
-              onPressed: () {
-                Navigator.pushNamed(context, '/sign-in');
-              },
-            )
           ],
         ),
       ),
