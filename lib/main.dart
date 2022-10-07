@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/ui/pages/onboarding_page.dart';
 import 'package:moneywise_app/ui/pages/sign_in_page.dart';
+import 'package:moneywise_app/ui/pages/sign_up_page.dart';
 
 import 'ui/pages/splash_page.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashPage(),
         '/onboarding': (context) => const OnBoardingPage(),
         '/sign-in': (context) => const SignInPage(),
+        '/sign-up': (context) => const SignUpPage(),
       },
     );
   }
