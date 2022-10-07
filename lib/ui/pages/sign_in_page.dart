@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
+import 'package:moneywise_app/ui/widgets/forms.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -45,44 +46,12 @@ class SignInPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // NOTE: EMAIL INPUT
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Email Address',
-                        style: blackTextStyle.copyWith(fontWeight: medium),
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          contentPadding: const EdgeInsets.all(12),
-                        ),
-                      ),
-                    ],
-                  ),
+                  CustomFormField(title: 'Email Address'),
                   const SizedBox(height: 16),
                   // NOTE: PASSWORD INPUT
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Password',
-                        style: blackTextStyle.copyWith(fontWeight: medium),
-                      ),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          contentPadding: const EdgeInsets.all(12),
-                        ),
-                      ),
-                    ],
+                  CustomFormField(
+                    title: 'Password',
+                    obscureText: true,
                   ),
                   const SizedBox(height: 8),
                   Align(
@@ -101,7 +70,7 @@ class SignInPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            CustomTextWidget(
+            CustomTextButton(
               title: 'Create New Account',
               onPressed: () {},
             )

@@ -115,7 +115,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                               },
                             ),
                             const SizedBox(height: 20),
-                            CustomTextWidget(
+                            CustomTextButton(
                               title: 'Sign In',
                               onPressed: () {},
                             ),
