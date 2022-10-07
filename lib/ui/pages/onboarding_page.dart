@@ -106,17 +106,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             CustomFilledButton(
                               title: 'Get Started',
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignInPage(),
-                                  ),
-                                );
+                                Navigator.pushNamed(context, '/sign-in');
                               },
                             ),
                             const SizedBox(height: 20),
                             CustomTextButton(
-                              title: 'Sign In',
+                              title: 'Sign Up',
                               onPressed: () {},
                             ),
                           ],

@@ -43,12 +43,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
     Timer(
       const Duration(milliseconds: 2500),
       () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const OnBoardingPage(),
-          ),
-        );
+        Navigator.pushNamed(context, '/onboarding');
       },
     );
   }
