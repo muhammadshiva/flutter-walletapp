@@ -4,6 +4,7 @@ import 'package:moneywise_app/ui/pages/sign_in_page.dart';
 import 'package:moneywise_app/ui/pages/sign_up_page.dart';
 import 'package:moneywise_app/ui/pages/sign_up_set_profile_page.dart';
 
+import 'ui/pages/sign_up_set_ktp_page.dart';
 import 'ui/pages/splash_page.dart';
 
 void main() => runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/sign-in': (context) => const SignInPage(),
         '/sign-up': (context) => const SignUpPage(),
         '/sign-up-set-profile': (context) => const SignUpSetProfilePage(),
+        '/sign-up-set-ktp': (context) => const SignUpSetKtpPage(),
       },
     );
   }

@@ -3,8 +3,8 @@ import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 
-class SignUpSetProfilePage extends StatelessWidget {
-  const SignUpSetProfilePage({Key? key}) : super(key: key);
+class SignUpSetKtpPage extends StatelessWidget {
+  const SignUpSetKtpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SignUpSetProfilePage extends StatelessWidget {
               ),
             ),
             Text(
-              'Join Us to Unlock\nYour Growth',
+              'Verify Your\nAccount',
               style: blackTextStyle.copyWith(
                 fontSize: 20,
                 fontWeight: semiBold,
@@ -43,54 +43,53 @@ class SignUpSetProfilePage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // Container(
-                  //   width: 120,
-                  //   height: 120,
-                  //   decoration: BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     color: lightBgColor,
-                  //   ),
-                  //   child: Center(
-                  //     child: Image.asset(
-                  //       'assets/ic_upload.png',
-                  //       width: 32,
-                  //       height: 32,
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
                     width: 120,
                     height: 120,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/img_profile.png'),
+                      color: lightBgColor,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/ic_upload.png',
+                        width: 32,
+                        height: 32,
                       ),
                     ),
                   ),
+                  // Container(
+                  //   width: 120,
+                  //   height: 120,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     image: DecorationImage(
+                  //       fit: BoxFit.cover,
+                  //       image: AssetImage('assets/img_profile.png'),
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 16),
                   Text(
-                    'Shayana Hanna',
+                    'Passport/ID Card',
                     style: blackTextStyle.copyWith(
                       fontWeight: medium,
                       fontSize: 18,
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  CustomFormField(
-                    title: 'Set PIN (6 digit number)',
-                    obscureText: true,
-                  ),
+
                   const SizedBox(height: 30),
                   CustomFilledButton(
                     title: 'Continue',
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up-set-ktp');
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: 60),
+            CustomTextButton(
+              title: 'Skip for Now',
+              onPressed: () {},
             ),
           ],
         ),
