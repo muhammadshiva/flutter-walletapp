@@ -11,6 +11,7 @@ import 'package:moneywise_app/ui/pages/sign_in_page.dart';
 import 'package:moneywise_app/ui/pages/sign_up_page.dart';
 import 'package:moneywise_app/ui/pages/sign_up_set_profile_page.dart';
 import 'package:moneywise_app/ui/pages/sign_up_success_page.dart';
+import 'package:moneywise_app/ui/pages/topup_page.dart';
 
 import 'ui/pages/sign_up_set_ktp_page.dart';
 import 'ui/pages/splash_page.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         '/profile-edit': (context) => const ProfileEditPage(),
         '/profile-edit-pin': (context) => const ProfileEditPinPage(),
         '/profile-edit-success': (context) => const ProfileEditSuccessPage(),
+        '/topup': (context) => const TopupPage(),
       },
     );
   }
