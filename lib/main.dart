@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/pages/home_page.dart';
 import 'package:moneywise_app/ui/pages/onboarding_page.dart';
 import 'package:moneywise_app/ui/pages/profile_page.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: lightBgColor,
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const SplashPage(),
