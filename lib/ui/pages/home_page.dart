@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/widgets/home_latest_transactions_item.dart';
+import 'package:moneywise_app/ui/widgets/home_user_items.dart';
 import 'package:moneywise_app/ui/widgets/home_service_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -85,6 +88,8 @@ class HomePage extends StatelessWidget {
             buildWalletCard(),
             buildLevel(),
             buildServices(),
+            buildLatestTransactions(),
+            buildSendAgain(),
           ],
         ),
       ),
@@ -291,6 +296,111 @@ class HomePage extends StatelessWidget {
                 onTap: () {},
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLatestTransactions() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Latest Transactions',
+            style: blackTextStyle.copyWith(
+              fontWeight: semiBold,
+              fontSize: 16,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.only(top: 14),
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: whiteColor,
+            ),
+            child: Column(
+              children: const [
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat1.png',
+                  title: 'Top Up',
+                  time: 'Yesterday',
+                  value: '+ 450.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat2.png',
+                  title: 'Cashback',
+                  time: 'Sep 11',
+                  value: '+ 22.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat3.png',
+                  title: 'Withdraw',
+                  time: 'Yesterday',
+                  value: '- 5000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat4.png',
+                  title: 'Transfer',
+                  time: 'Aug 27',
+                  value: '- 123.500',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat5.png',
+                  title: 'Electric',
+                  time: 'Feb 18',
+                  value: '- 12.300.000',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSendAgain() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Send Again',
+            style: blackTextStyle.copyWith(
+              fontWeight: semiBold,
+              fontSize: 16,
+            ),
+          ),
+          const SizedBox(
+            height: 14,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: const [
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend1.png',
+                  username: 'yuanita',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend2.png',
+                  username: 'jani',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend3.png',
+                  username: 'urip',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend4.png',
+                  username: 'masa',
+                ),
+              ],
+            ),
           ),
         ],
       ),
