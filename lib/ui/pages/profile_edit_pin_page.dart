@@ -4,14 +4,14 @@ import '../../shared/theme.dart';
 import '../widgets/buttons.dart';
 import '../widgets/forms.dart';
 
-class ProfileEditPage extends StatelessWidget {
-  const ProfileEditPage({Key? key}) : super(key: key);
+class ProfileEditPinPage extends StatelessWidget {
+  const ProfileEditPinPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Photo'),
+        title: const Text('Edit PIN'),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -26,16 +26,9 @@ class ProfileEditPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomFormField(title: 'Username'),
+                const CustomFormField(title: 'Old PIN'),
                 const SizedBox(height: 16),
-                const CustomFormField(title: 'Full Name'),
-                const SizedBox(height: 16),
-                const CustomFormField(title: 'Email Address'),
-                const SizedBox(height: 16),
-                const CustomFormField(
-                  title: 'Password',
-                  obscureText: true,
-                ),
+                const CustomFormField(title: 'New PIN'),
                 const SizedBox(height: 30),
                 CustomFilledButton(
                   title: 'Update Now',
