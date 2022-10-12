@@ -411,7 +411,10 @@ class HomePage extends StatelessWidget {
 
   Widget buildFriendlyTips() {
     return Container(
-      margin: const EdgeInsets.only(top: 30),
+      margin: const EdgeInsets.only(
+        top: 30,
+        bottom: 50,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -420,10 +423,31 @@ class HomePage extends StatelessWidget {
             style: blackTextStyle.copyWith(fontWeight: semiBold, fontSize: 16),
           ),
           const SizedBox(height: 14),
-          const HomeTipsItem(
-            imageUrl: 'assets/img_tips1.png',
-            title: 'Best tips for using a credit card',
-            url: 'https://www.google.com',
+          Wrap(
+            spacing: 17,
+            runSpacing: 18,
+            children: const [
+              HomeTipsItem(
+                imageUrl: 'assets/img_tips1.png',
+                title: 'Best tips for using a credit card',
+                url: 'https://www.google.com',
+              ),
+              HomeTipsItem(
+                imageUrl: 'assets/img_tips2.png',
+                title: 'Spot the good pie of finance model',
+                url: 'https://www.google.com',
+              ),
+              HomeTipsItem(
+                imageUrl: 'assets/img_tips3.png',
+                title: 'Great hack to get better advices',
+                url: 'https://www.google.com',
+              ),
+              HomeTipsItem(
+                imageUrl: 'assets/img_tips4.png',
+                title: 'Save more penny buy this instead',
+                url: 'https://www.google.com',
+              ),
+            ],
           ),
         ],
       ),
