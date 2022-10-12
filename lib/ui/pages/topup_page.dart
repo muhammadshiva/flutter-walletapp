@@ -67,6 +67,7 @@ class TopupPage extends StatelessWidget {
                 title: 'BANK BCA',
                 time: '50 mins',
                 onTap: () {},
+                isSelected: true,
               ),
               TopupItem(
                 imageUrl: 'assets/img_bank_bni.png',
