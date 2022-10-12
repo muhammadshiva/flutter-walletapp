@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/home_latest_transactions_item.dart';
+import 'package:moneywise_app/ui/widgets/home_tips_item.dart';
 import 'package:moneywise_app/ui/widgets/home_user_items.dart';
 import 'package:moneywise_app/ui/widgets/home_service_item.dart';
 
@@ -90,6 +91,7 @@ class HomePage extends StatelessWidget {
             buildServices(),
             buildLatestTransactions(),
             buildSendAgain(),
+            buildFriendlyTips(),
           ],
         ),
       ),
@@ -401,6 +403,27 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildFriendlyTips() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Friendly Tips',
+            style: blackTextStyle.copyWith(fontWeight: semiBold, fontSize: 16),
+          ),
+          const SizedBox(height: 14),
+          const HomeTipsItem(
+            imageUrl: 'assets/img_tips1.png',
+            title: 'Best tips for using a credit card',
+            url: 'https://www.google.com',
           ),
         ],
       ),
