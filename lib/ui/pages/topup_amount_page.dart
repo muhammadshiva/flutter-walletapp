@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopupAmountPage extends StatefulWidget {
   const TopupAmountPage({Key? key}) : super(key: key);
@@ -181,6 +182,8 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             title: 'Checkout Now',
             onPressed: () async {
               if (await Navigator.pushNamed(context, '/pin') == true) {
+                await launchUrl(Uri.parse('https://demo.midtrans.com/'));
+
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/topup-success', (route) => false);
               }
