@@ -21,6 +21,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: lightBgColor,
+        appBarTheme: AppBarTheme(
+          backgroundColor: lightBgColor,
+          elevation: 0,
+          centerTitle: true,
+          iconTheme: IconThemeData(
+            color: blackColor,
+          ),
+          titleTextStyle: blackTextStyle.copyWith(
+            fontWeight: semiBold,
+            fontSize: 20,
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       routes: {
