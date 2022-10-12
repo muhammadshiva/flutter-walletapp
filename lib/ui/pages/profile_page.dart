@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/widgets/buttons.dart';
+import 'package:moneywise_app/ui/widgets/profile_menu_item.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class ProfilePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 30,
@@ -74,9 +76,41 @@ class ProfilePage extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ),
+                const SizedBox(height: 40),
+                ProfileMenuItem(
+                  iconUrl: 'assets/ic_edit_profile.png',
+                  title: 'Edit Profile',
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
+                  iconUrl: 'assets/ic_pin.png',
+                  title: 'My Pin',
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
+                  iconUrl: 'assets/ic_wallet.png',
+                  title: 'Wallet Settings',
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
+                  iconUrl: 'assets/ic_help.png',
+                  title: 'Help Center',
+                  onTap: () {},
+                ),
+                ProfileMenuItem(
+                  iconUrl: 'assets/ic_logout.png',
+                  title: 'Edit Profile',
+                  onTap: () {},
+                ),
               ],
             ),
           ),
+          const SizedBox(height: 87),
+          CustomTextButton(
+            title: 'Report a Problem',
+            onPressed: () {},
+          ),
+          const SizedBox(height: 50),
         ],
       ),
     );
