@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/data_provider_item.dart';
 
 class DataProviderPage extends StatelessWidget {
@@ -56,8 +57,25 @@ class DataProviderPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          DataProviderItem(
-              name: 'Telkomsel', imageUrl: 'assets/img_provider_telkomsel.png'),
+          const DataProviderItem(
+            name: 'Telkomsel',
+            imageUrl: 'assets/img_provider_telkomsel.png',
+            isSelected: true,
+          ),
+          const DataProviderItem(
+            name: 'Indosat',
+            imageUrl: 'assets/img_provider_indosat.png',
+          ),
+          const DataProviderItem(
+            name: 'Indosat',
+            imageUrl: 'assets/img_provider_singtel.png',
+          ),
+          const SizedBox(height: 135),
+          CustomFilledButton(
+            title: 'Continue',
+            onPressed: () {},
+          ),
+          const SizedBox(height: 57),
         ],
       ),
     );
