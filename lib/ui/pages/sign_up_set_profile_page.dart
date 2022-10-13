@@ -3,8 +3,12 @@ import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 
+import '../../models/signup_form_model.dart';
+
 class SignUpSetProfilePage extends StatelessWidget {
-  const SignUpSetProfilePage({Key? key}) : super(key: key);
+  final SignUpFormModel data;
+
+  const SignUpSetProfilePage({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
