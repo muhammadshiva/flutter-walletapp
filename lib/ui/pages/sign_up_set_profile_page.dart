@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moneywise_app/shared/shared_methods.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/pages/sign_up_set_ktp_page.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 
@@ -111,13 +113,30 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                     title: 'Set PIN (6 digit number)',
                     obscureText: true,
                     controller: pinController,
+                    keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 30),
                   CustomFilledButton(
                     title: 'Continue',
                     onPressed: () {
                       if (validate()) {
-                        Navigator.pushNamed(context, '/sign-up-set-ktp');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpSetKtpPage(
+                              data: widget.data.copyWith(
+                                pin: pinController.text,
+                                profilePicture: selectedImage == null
+                                    ? null
+                                    : 'data:image/png;base64,' +
+                                        base64Encode(
+                                          File(selectedImage!.path)
+                                              .readAsBytesSync(),
+                                        ),
+                              ),
+                            ),
+                          ),
+                        );
                       } else {
                         showCustomSnackbar(context, 'PIN harus 6 digit');
                       }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/models/signup_form_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 
 class SignUpSetKtpPage extends StatelessWidget {
-  const SignUpSetKtpPage({Key? key}) : super(key: key);
+  final SignUpFormModel data;
+
+  const SignUpSetKtpPage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
