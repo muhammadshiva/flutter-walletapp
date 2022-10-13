@@ -14,6 +14,7 @@ import 'package:moneywise_app/ui/pages/sign_up_success_page.dart';
 import 'package:moneywise_app/ui/pages/topup_amount_page.dart';
 import 'package:moneywise_app/ui/pages/topup_page.dart';
 import 'package:moneywise_app/ui/pages/topup_success_page.dart';
+import 'package:moneywise_app/ui/pages/transfer_page.dart';
 
 import 'ui/pages/sign_up_set_ktp_page.dart';
 import 'ui/pages/splash_page.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         '/topup': (context) => const TopupPage(),
         '/topup-amount': (context) => const TopupAmountPage(),
         '/topup-success': (context) => const TopUpSuccessPage(),
+        '/transfer': (context) => const TransferPage(),
       },
     );
   }
