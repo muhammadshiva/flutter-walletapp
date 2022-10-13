@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/widgets/data_provider_item.dart';
 
 class DataProviderPage extends StatelessWidget {
   const DataProviderPage({Key? key}) : super(key: key);
@@ -11,12 +12,15 @@ class DataProviderPage extends StatelessWidget {
         title: const Text('Beli Data'),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
           const SizedBox(height: 30),
           Text(
             'From Wallet',
-            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
           ),
           const SizedBox(height: 10),
           Row(
@@ -42,7 +46,18 @@ class DataProviderPage extends StatelessWidget {
                 ],
               )
             ],
-          )
+          ),
+          const SizedBox(height: 40),
+          Text(
+            'Select Provider',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          const SizedBox(height: 14),
+          DataProviderItem(
+              name: 'Telkomsel', imageUrl: 'assets/img_provider_telkomsel.png'),
         ],
       ),
     );
