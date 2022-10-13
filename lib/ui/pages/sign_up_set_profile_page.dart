@@ -22,6 +22,13 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
   final pinController = TextEditingController(text: '');
   XFile? selectedImage;
 
+  bool validate() {
+    if (pinController.text.length != 6) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +116,11 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                   CustomFilledButton(
                     title: 'Continue',
                     onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up-set-ktp');
+                      if (validate()) {
+                        Navigator.pushNamed(context, '/sign-up-set-ktp');
+                      } else {
+                        showCustomSnackbar(context, 'PIN harus 6 digit');
+                      }
                     },
                   ),
                 ],
