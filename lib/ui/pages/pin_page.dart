@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/shared/shared_methods.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 
@@ -19,8 +20,13 @@ class _PinPageState extends State<PinPage> {
       });
     }
 
-    if (pinController.text == '123123') {
-      Navigator.pop(context, true);
+    if (pinController.text.length == 6) {
+      if (pinController.text == '123123') {
+        Navigator.pop(context, true);
+      } else {
+        showCustomSnackbar(
+            context, 'PIN yang anda masukkan salah. Silahkan coba lagi.');
+      }
     }
   }
 
