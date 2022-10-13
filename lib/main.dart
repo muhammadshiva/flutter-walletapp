@@ -4,6 +4,7 @@ import 'package:moneywise_app/ui/pages/data_package_page.dart';
 import 'package:moneywise_app/ui/pages/data_provider_page.dart';
 import 'package:moneywise_app/ui/pages/data_success_page.dart';
 import 'package:moneywise_app/ui/pages/home_page.dart';
+import 'package:moneywise_app/ui/pages/money_planner_page.dart';
 import 'package:moneywise_app/ui/pages/onboarding_page.dart';
 import 'package:moneywise_app/ui/pages/pin_page.dart';
 import 'package:moneywise_app/ui/pages/profile_edit_page.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         '/data-provider': (context) => const DataProviderPage(),
         '/data-package': (context) => const DataPackagePage(),
         '/data-success': (context) => const DataSuccessPage(),
+        '/money-planner': (context) => const MoneyPlannerPage(),
       },
     );
   }

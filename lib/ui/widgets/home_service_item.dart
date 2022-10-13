@@ -40,6 +40,7 @@ class HomeServiceItem extends StatelessWidget {
           style: blackTextStyle.copyWith(
             fontWeight: medium,
           ),
+          textAlign: TextAlign.center,
         )
       ],
     );

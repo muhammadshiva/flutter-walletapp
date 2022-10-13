@@ -480,7 +480,7 @@ class MoreDialog extends StatelessWidget {
       content: Container(
         padding: const EdgeInsets.all(30),
         width: MediaQuery.of(context).size.width,
-        height: 326,
+        height: 477,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           color: lightBgColor,
@@ -529,6 +529,13 @@ class MoreDialog extends StatelessWidget {
                   iconUrl: 'assets/ic_product_travel.png',
                   title: 'Travel',
                   onTap: () {},
+                ),
+                HomeServiceItem(
+                  iconUrl: 'assets/ic_money_plan.png',
+                  title: 'Rencana\nKeuangan',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/money-planner');
+                  },
                 ),
               ],
             ),
