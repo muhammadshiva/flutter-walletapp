@@ -3,6 +3,8 @@ import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/data_provider_item.dart';
 
+import '../../shared/shared_methods.dart';
+
 class DataProviderPage extends StatelessWidget {
   const DataProviderPage({Key? key}) : super(key: key);
 
@@ -41,7 +43,7 @@ class DataProviderPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Balance: Rp 180.000.000',
+                    'Balance: ${formatCurrency(180000000)}',
                     style: greyTextStyle.copyWith(fontSize: 12),
                   ),
                 ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
 
+import '../../shared/shared_methods.dart';
+
 class MoneyPlannnerItem extends StatelessWidget {
   const MoneyPlannnerItem({
     Key? key,
@@ -77,7 +79,7 @@ class MoneyPlannnerItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Rp $amount',
+                      'Rp ${formatCurrency(amount)}',
                       style: blackTextStyle.copyWith(
                         fontWeight: semiBold,
                         fontSize: 12,
@@ -92,7 +94,7 @@ class MoneyPlannnerItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          ' of Rp $total',
+                          ' of Rp ${formatCurrency(total)}',
                           style: greyTextStyle.copyWith(
                             fontSize: 12,
                           ),
