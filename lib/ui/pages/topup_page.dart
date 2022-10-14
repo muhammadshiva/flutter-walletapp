@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/topup_item.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
 
 class TopupPage extends StatelessWidget {
   const TopupPage({Key? key}) : super(key: key);
@@ -27,31 +30,40 @@ class TopupPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  Image.asset(
-                    'assets/img_wallet.png',
-                    width: 80,
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '8008 2208 1996',
-                        style: blackTextStyle.copyWith(
-                          fontWeight: medium,
-                          fontSize: 16,
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthSuccess) {
+                    return Row(
+                      children: [
+                        Image.asset(
+                          'assets/img_wallet.png',
+                          width: 80,
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Shayana Hanna',
-                        style: greyTextStyle.copyWith(fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(width: 16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.user.cardNumber!.replaceAllMapped(
+                                  RegExp(r".{4}"),
+                                  (match) => "${match.group(0)} "),
+                              style: blackTextStyle.copyWith(
+                                fontWeight: medium,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              state.user.name.toString(),
+                              style: greyTextStyle.copyWith(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }
+                  return Container();
+                },
               ),
               const SizedBox(height: 40),
               Text(
