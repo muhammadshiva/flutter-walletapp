@@ -2,6 +2,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:moneywise_app/models/signup_form_model.dart';
+import 'package:moneywise_app/models/user_model.dart';
 import 'package:moneywise_app/shared/shared_values.dart';
 
 class AuthService {
@@ -19,6 +21,26 @@ class AuthService {
         return jsonDecode(res.body)['is_email_exist'];
       } else {
         return jsonDecode(res.body)['errors'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> register(SignUpFormModel data) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/register'),
+        body: data.toJson(),
+      );
+
+      if (res.statusCode == 200) {
+        UserModel user = UserModel.fromJson(jsonDecode(res.body));
+        user = user.copyWith(password: data.password);
+
+        return user;
+      } else {
+        throw jsonDecode(res.body)['message'];
       }
     } catch (e) {
       rethrow;
