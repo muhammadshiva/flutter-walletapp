@@ -4,39 +4,55 @@ import 'package:moneywise_app/models/signup_form_model.dart';
 import 'package:moneywise_app/models/user_model.dart';
 import 'package:moneywise_app/services/auth_service.dart';
 
+import '../../models/signin_form_model.dart';
+
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) async {
-      if (event is AuthCheckEmail) {
-        try {
-          emit(AuthLoading());
-          final res = await AuthService().checkEmail(event.email);
+    on<AuthEvent>(
+      (event, emit) async {
+        if (event is AuthCheckEmail) {
+          try {
+            emit(AuthLoading());
+            final res = await AuthService().checkEmail(event.email);
 
-          if (res == false) {
-            emit(AuthCheckEmailSuccess());
-          } else {
-            emit(const AuthFailed(
-                'Email sudah digunakan, coba input email lain'));
+            if (res == false) {
+              emit(AuthCheckEmailSuccess());
+            } else {
+              emit(const AuthFailed(
+                  'Email sudah digunakan, coba input email lain'));
+            }
+          } catch (e) {
+            emit(AuthFailed(e.toString()));
           }
-        } catch (e) {
-          emit(AuthFailed(e.toString()));
         }
-      }
 
-      if (event is AuthRegister) {
-        try {
-          emit(AuthLoading());
+        if (event is AuthRegister) {
+          try {
+            emit(AuthLoading());
 
-          final user = await AuthService().register(event.data);
+            final user = await AuthService().register(event.data);
 
-          emit(AuthSuccess(user));
-        } catch (e) {
-          emit(AuthFailed(e.toString()));
+            emit(AuthSuccess(user));
+          } catch (e) {
+            emit(AuthFailed(e.toString()));
+          }
         }
-      }
-    });
+
+        if (event is AuthLogin) {
+          try {
+            emit(AuthLoading());
+
+            final user = await AuthService().login(event.data);
+
+            emit(AuthSuccess(user));
+          } catch (e) {
+            emit(AuthFailed(e.toString()));
+          }
+        }
+      },
+    );
   }
 }
