@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/shared/shared_methods.dart';
 
 import 'package:moneywise_app/shared/theme.dart';
@@ -6,6 +7,8 @@ import 'package:moneywise_app/ui/widgets/home_latest_transactions_item.dart';
 import 'package:moneywise_app/ui/widgets/home_tips_item.dart';
 import 'package:moneywise_app/ui/widgets/home_user_items.dart';
 import 'package:moneywise_app/ui/widgets/home_service_item.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -99,121 +102,141 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildProfile(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 40),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Howdy,',
-                style: greyTextStyle.copyWith(
-                  fontSize: 16,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthSuccess) {
+          return Container(
+            margin: const EdgeInsets.only(top: 40),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Howdy,',
+                      style: greyTextStyle.copyWith(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      state.user.name.toString(),
+                      style: blackTextStyle.copyWith(
+                        fontWeight: semiBold,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                'shaynahan',
-                style: blackTextStyle.copyWith(
-                  fontWeight: semiBold,
-                  fontSize: 20,
-                ),
-              )
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/profile');
-            },
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/img_profile.png'),
-                ),
-              ),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: whiteColor,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.check_circle,
-                      color: greenColor,
-                      size: 14,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: state.user.profilePicture == null
+                            ? const AssetImage(
+                                'assets/img_profile.png',
+                              )
+                            : NetworkImage(
+                                state.user.profilePicture!,
+                              ) as ImageProvider,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: whiteColor,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check_circle,
+                            color: greenColor,
+                            size: 14,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
   Widget buildWalletCard() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(30),
-      height: 220,
-      margin: const EdgeInsets.only(top: 30),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        image: const DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('assets/img_bg_card.png'),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Shayana Hanna',
-            style: whiteTextStyle.copyWith(
-              fontSize: 18,
-              fontWeight: medium,
-            ),
-          ),
-          const SizedBox(height: 28),
-          Text(
-            '**** **** **** 1280',
-            style: whiteTextStyle.copyWith(
-              fontSize: 18,
-              fontWeight: medium,
-              letterSpacing: 6,
-            ),
-          ),
-          const SizedBox(height: 21),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Balance',
-                style: whiteTextStyle,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthSuccess) {
+          return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(30),
+            height: 220,
+            margin: const EdgeInsets.only(top: 30),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(28),
+              image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/img_bg_card.png'),
               ),
-              Text(
-                formatCurrency(12500),
-                style: whiteTextStyle.copyWith(
-                  fontWeight: semiBold,
-                  fontSize: 24,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  state.user.name.toString(),
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
                 ),
-              )
-            ],
-          ),
-        ],
-      ),
+                const SizedBox(height: 28),
+                Text(
+                  '**** **** **** ${state.user.cardNumber!.substring(12, 16)}',
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
+                    letterSpacing: 6,
+                  ),
+                ),
+                const SizedBox(height: 21),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Balance',
+                      style: whiteTextStyle,
+                    ),
+                    Text(
+                      formatCurrency(state.user.balance ?? 0),
+                      style: whiteTextStyle.copyWith(
+                        fontWeight: semiBold,
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
