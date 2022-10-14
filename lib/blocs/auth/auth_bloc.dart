@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:moneywise_app/models/signup_form_model.dart';
+import 'package:moneywise_app/models/user_model.dart';
 import 'package:moneywise_app/services/auth_service.dart';
 
 part 'auth_event.dart';
@@ -16,8 +18,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (res == false) {
             emit(AuthCheckEmailSuccess());
           } else {
-            emit(const AuthFailed('Email sudah digunakan'));
+            emit(const AuthFailed(
+                'Email sudah digunakan, coba input email lain'));
           }
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+
+      if (event is AuthRegister) {
+        try {
+          emit(AuthLoading());
+
+          final user = await AuthService().register(event.data);
+
+          emit(AuthSuccess(user));
         } catch (e) {
           emit(AuthFailed(e.toString()));
         }
