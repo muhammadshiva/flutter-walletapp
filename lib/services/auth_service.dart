@@ -6,6 +6,8 @@ import 'package:moneywise_app/models/signup_form_model.dart';
 import 'package:moneywise_app/models/user_model.dart';
 import 'package:moneywise_app/shared/shared_values.dart';
 
+import '../models/signin_form_model.dart';
+
 class AuthService {
   Future<bool> checkEmail(String email) async {
     try {
@@ -31,6 +33,26 @@ class AuthService {
     try {
       final res = await http.post(
         Uri.parse('$baseUrl/register'),
+        body: data.toJson(),
+      );
+
+      if (res.statusCode == 200) {
+        UserModel user = UserModel.fromJson(jsonDecode(res.body));
+        user = user.copyWith(password: data.password);
+
+        return user;
+      } else {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> login(SignInFormModel data) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/login'),
         body: data.toJson(),
       );
 
