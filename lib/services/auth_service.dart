@@ -95,7 +95,7 @@ class AuthService {
       } else {
         final SignInFormModel data = SignInFormModel(
           email: values['email'],
-          password: values['passwprd'],
+          password: values['password'],
         );
 
         return data;
