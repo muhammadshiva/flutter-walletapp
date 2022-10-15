@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:moneywise_app/models/topup_form_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TopupAmountPage extends StatefulWidget {
-  const TopupAmountPage({Key? key}) : super(key: key);
+  final TopupFormModel data;
+
+  const TopupAmountPage({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   State<TopupAmountPage> createState() => _TopupAmountPageState();
