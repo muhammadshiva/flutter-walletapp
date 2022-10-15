@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/models/user_model.dart';
 
 import '../../shared/theme.dart';
 
 class TransferRecentUserItem extends StatelessWidget {
+  final UserModel user;
+
   const TransferRecentUserItem({
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.userName,
-    this.isVerified = false,
+    required this.user,
   }) : super(key: key);
-
-  final String imageUrl;
-  final String name;
-  final String userName;
-  final bool isVerified;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +30,9 @@ class TransferRecentUserItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: user.profilePicture != null
+                    ? const AssetImage('assets/img_profile.png')
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
           ),
@@ -43,7 +40,7 @@ class TransferRecentUserItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontWeight: medium,
                   fontSize: 16,
@@ -51,7 +48,7 @@ class TransferRecentUserItem extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                '@$userName',
+                '@${user.username}',
                 style: greyTextStyle.copyWith(
                   fontSize: 12,
                 ),
@@ -59,7 +56,7 @@ class TransferRecentUserItem extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          if (isVerified)
+          if (user.verified == 1)
             Row(
               children: [
                 Icon(

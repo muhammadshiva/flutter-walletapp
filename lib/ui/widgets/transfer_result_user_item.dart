@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/models/user_model.dart';
 import '../../shared/theme.dart';
 
 class TransferResultUserItem extends StatelessWidget {
+  final UserModel user;
+  final bool isSelected;
+
   const TransferResultUserItem({
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.userName,
-    this.isVerified = false,
+    required this.user,
     this.isSelected = false,
   }) : super(key: key);
-
-  final String imageUrl;
-  final String name;
-  final String userName;
-  final bool isVerified;
-  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +37,12 @@ class TransferResultUserItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: user.profilePicture != null
+                    ? const AssetImage('assets/img_profile.png')
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
-            child: isVerified
+            child: user.verified == 1
                 ? Align(
                     alignment: Alignment.topRight,
                     child: Container(
@@ -68,7 +65,7 @@ class TransferResultUserItem extends StatelessWidget {
           ),
           const SizedBox(height: 13),
           Text(
-            name,
+            user.name.toString(),
             style: blackTextStyle.copyWith(
               fontWeight: medium,
               fontSize: 16,
@@ -77,7 +74,7 @@ class TransferResultUserItem extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            '@$userName',
+            '${user.username}',
             style: greyTextStyle.copyWith(
               fontSize: 12,
             ),
