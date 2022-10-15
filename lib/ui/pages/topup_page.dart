@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moneywise_app/blocs/payment_method/payment_method_bloc.dart';
+import 'package:moneywise_app/models/payment_method_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
-import 'package:moneywise_app/ui/widgets/topup_item.dart';
+import 'package:moneywise_app/ui/widgets/bank_item.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 
-class TopupPage extends StatelessWidget {
+class TopupPage extends StatefulWidget {
   const TopupPage({Key? key}) : super(key: key);
+
+  @override
+  State<TopupPage> createState() => _TopupPageState();
+}
+
+class _TopupPageState extends State<TopupPage> {
+  PaymentMethodModel? selectedPaymentMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -74,38 +83,43 @@ class TopupPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              TopupItem(
-                imageUrl: 'assets/img_bank_bca.png',
-                title: 'BANK BCA',
-                time: '50 mins',
-                onTap: () {},
-                isSelected: true,
-              ),
-              TopupItem(
-                imageUrl: 'assets/img_bank_bni.png',
-                title: 'BANK BNI',
-                time: '50 mins',
-                onTap: () {},
-              ),
-              TopupItem(
-                imageUrl: 'assets/img_bank_mandiri.png',
-                title: 'BANK Mandiri',
-                time: '50 mins',
-                onTap: () {},
-              ),
-              TopupItem(
-                imageUrl: 'assets/img_bank_ocbc.png',
-                title: 'BANK OCBC',
-                time: '50 mins',
-                onTap: () {},
+              BlocProvider(
+                create: (context) =>
+                    PaymentMethodBloc()..add(PaymentMethodGet()),
+                child: BlocBuilder<PaymentMethodBloc, PaymentMethodState>(
+                  builder: (context, state) {
+                    if (state is PaymentMethodSuccess) {
+                      return Column(
+                        children: state.paymentMethods.map((paymentMethod) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedPaymentMethod = paymentMethod;
+                              });
+                            },
+                            child: BankItem(
+                              paymentMethod: paymentMethod,
+                              isSelected:
+                                  paymentMethod.id == selectedPaymentMethod?.id,
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 30),
-              CustomFilledButton(
-                title: 'Continue',
-                onPressed: () {
-                  Navigator.pushNamed(context, '/topup-amount');
-                },
-              ),
+              if (selectedPaymentMethod != null)
+                CustomFilledButton(
+                  title: 'Continue',
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/topup-amount');
+                  },
+                ),
               const SizedBox(height: 57),
             ],
           ),
