@@ -14,6 +14,9 @@ class PaymentMethodLoading extends PaymentMethodState {}
 class PaymentMethodFailed extends PaymentMethodState {
   final String e;
   const PaymentMethodFailed(this.e);
+
+  @override
+  List<Object> get props => [e];
 }
 
 class PaymentMethodSuccess extends PaymentMethodState {
