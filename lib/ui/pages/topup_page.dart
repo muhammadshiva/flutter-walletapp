@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/blocs/payment_method/payment_method_bloc.dart';
 import 'package:moneywise_app/models/payment_method_model.dart';
+import 'package:moneywise_app/models/topup_form_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/pages/topup_amount_page.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/bank_item.dart';
 
@@ -117,7 +119,16 @@ class _TopupPageState extends State<TopupPage> {
                 CustomFilledButton(
                   title: 'Continue',
                   onPressed: () {
-                    Navigator.pushNamed(context, '/topup-amount');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TopupAmountPage(
+                          data: TopupFormModel(
+                            paymentMethodCode: selectedPaymentMethod?.code,
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
               const SizedBox(height: 57),
