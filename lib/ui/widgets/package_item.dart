@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/models/data_plan_model.dart';
 
 import '../../shared/shared_methods.dart';
 import '../../shared/theme.dart';
 
 class PackageItem extends StatelessWidget {
+  final DataPlanModel dataPlan;
+  final bool isSelected;
+
   const PackageItem({
     Key? key,
-    required this.amount,
-    required this.price,
+    required this.dataPlan,
     this.isSelected = false,
   }) : super(key: key);
-
-  final int amount;
-  final int price;
-  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class PackageItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '${amount}GB',
+            dataPlan.name.toString(),
             style: blackTextStyle.copyWith(
               fontWeight: medium,
               fontSize: 32,
@@ -45,7 +44,7 @@ class PackageItem extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            formatCurrency(price),
+            formatCurrency(dataPlan.price ?? 0),
             style: greyTextStyle.copyWith(
               fontSize: 12,
             ),
