@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
 
+import '../../models/operator_card_model.dart';
+
 class DataProviderItem extends StatelessWidget {
+  final OperatorCardModel operatorCard;
+
   const DataProviderItem({
     Key? key,
-    required this.name,
-    required this.imageUrl,
+    required this.operatorCard,
     this.isSelected = false,
   }) : super(key: key);
 
-  final String name;
-  final String imageUrl;
   final bool isSelected;
 
   @override
@@ -33,15 +34,15 @@ class DataProviderItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            imageUrl,
+          Image.network(
+            operatorCard.thumbnail.toString(),
             height: 30,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                name,
+                operatorCard.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: medium,
@@ -49,7 +50,7 @@ class DataProviderItem extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                'Available',
+                operatorCard.status.toString(),
                 style: greyTextStyle.copyWith(
                   fontSize: 12,
                 ),
