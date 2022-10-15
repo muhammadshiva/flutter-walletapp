@@ -10,7 +10,7 @@ class OperatorCardService {
     try {
       final token = await AuthService().getToken();
 
-      final res = await http.post(
+      final res = await http.get(
         Uri.parse(
           '$baseUrl/operator_cards',
         ),
