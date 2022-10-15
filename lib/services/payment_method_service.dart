@@ -11,19 +11,18 @@ class PaymentMethodService {
       final token = await AuthService().getToken();
 
       final res = await http.get(
-          Uri.parse(
-            '$baseUrl/payment_methods',
-          ),
-          headers: {
-            'Authorization': token,
-          });
+        Uri.parse(
+          '$baseUrl/payment_methods',
+        ),
+        headers: {
+          'Authorization': token,
+        },
+      );
 
       if (res.statusCode == 200) {
-        return List<PaymentMethodModel>.from(
-          jsonDecode(res.body).map(
-            (paymentMethod) => PaymentMethodModel.fromJson(paymentMethod),
-          ),
-        ).toList();
+        return List<PaymentMethodModel>.from(jsonDecode(res.body).map(
+                (paymentMethod) => PaymentMethodModel.fromJson(paymentMethod)))
+            .toList();
       } else {
         throw jsonDecode(res.body)['message'];
       }
