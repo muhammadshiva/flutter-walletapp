@@ -1,10 +1,11 @@
-import 'package:moneywise_app/models/data_plan_model.dart';
+import 'data_plan_model.dart';
 
 class OperatorCardModel {
   final int? id;
   final String? name;
   final String? status;
   final String? thumbnail;
+
   final List<DataPlanModel>? dataPlans;
 
   OperatorCardModel({
