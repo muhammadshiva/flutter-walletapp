@@ -87,7 +87,7 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
               context.read<AuthBloc>().add(
                     AuthUpdateBalance(
                       int.parse(
-                        amountController.text.replaceAll('.', 'replace'),
+                        amountController.text.replaceAll('.', ''),
                       ),
                     ),
                   );
