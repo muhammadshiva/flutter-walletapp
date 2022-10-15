@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/models/operator_card_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/package_item.dart';
@@ -6,7 +7,12 @@ import 'package:moneywise_app/ui/widgets/package_item.dart';
 import '../widgets/forms.dart';
 
 class DataPackagePage extends StatelessWidget {
-  const DataPackagePage({Key? key}) : super(key: key);
+  final OperatorCardModel operatorCard;
+
+  const DataPackagePage({
+    Key? key,
+    required this.operatorCard,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

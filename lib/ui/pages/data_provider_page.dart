@@ -114,7 +114,14 @@ class _DataProviderPageState extends State<DataProviderPage> {
               child: CustomFilledButton(
                 title: 'Continue',
                 onPressed: () {
-                  MaterialPageRoute(builder: (context) => DataPackagePage());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DataPackagePage(
+                        operatorCard: selectedOperatorCard!,
+                      ),
+                    ),
+                  );
                 },
               ),
             )
