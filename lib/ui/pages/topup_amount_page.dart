@@ -7,6 +7,7 @@ import 'package:moneywise_app/shared/shared_methods.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../blocs/topup/topup_bloc.dart';
 
@@ -83,9 +84,19 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             if (state is TopupSuccess) {
               await launchUrl(Uri.parse(state.redirectUrl));
 
+              context.read<AuthBloc>().add(
+                    AuthUpdateBalance(
+                      int.parse(
+                        amountController.text.replaceAll('.', 'replace'),
+                      ),
+                    ),
+                  );
+
               Navigator.pushNamedAndRemoveUntil(
                   context, '/topup-success', (route) => false);
             }
+
+            if (state is TopupSuccess) {}
           },
           builder: (context, state) {
             return ListView(
