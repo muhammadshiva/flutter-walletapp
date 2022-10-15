@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moneywise_app/models/operator_card_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/pages/data_package_page.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/data_provider_item.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/operator_card/operator_card_bloc.dart';
 import '../../shared/shared_methods.dart';
 
-class DataProviderPage extends StatelessWidget {
+class DataProviderPage extends StatefulWidget {
   const DataProviderPage({Key? key}) : super(key: key);
+
+  @override
+  State<DataProviderPage> createState() => _DataProviderPageState();
+}
+
+class _DataProviderPageState extends State<DataProviderPage> {
+  OperatorCardModel? selectedOperatorCard;
 
   @override
   Widget build(BuildContext context) {
@@ -69,29 +79,47 @@ class DataProviderPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          const DataProviderItem(
-            name: 'Telkomsel',
-            imageUrl: 'assets/img_provider_telkomsel.png',
-            isSelected: true,
+          BlocProvider(
+            create: (context) => OperatorCardBloc()..add(OperatorCardGet()),
+            child: BlocBuilder<OperatorCardBloc, OperatorCardState>(
+              builder: (context, state) {
+                print(state);
+                if (state is OperatorCardSuccess) {
+                  return Column(
+                      children: state.operatorCards.map((operatorCard) {
+                    return GestureDetector(
+                      onTap: (() {
+                        setState(() {
+                          selectedOperatorCard = operatorCard;
+                        });
+                      }),
+                      child: DataProviderItem(
+                        operatorCard: operatorCard,
+                        isSelected: operatorCard.id == selectedOperatorCard?.id,
+                      ),
+                    );
+                  }).toList());
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           ),
-          const DataProviderItem(
-            name: 'Indosat',
-            imageUrl: 'assets/img_provider_indosat.png',
-          ),
-          const DataProviderItem(
-            name: 'Indosat',
-            imageUrl: 'assets/img_provider_singtel.png',
-          ),
-          const SizedBox(height: 135),
-          CustomFilledButton(
-            title: 'Continue',
-            onPressed: () {
-              Navigator.pushNamed(context, '/data-package');
-            },
-          ),
-          const SizedBox(height: 57),
         ],
       ),
+      floatingActionButton: (selectedOperatorCard != null)
+          ? Container(
+              margin: const EdgeInsets.all(24),
+              child: CustomFilledButton(
+                title: 'Continue',
+                onPressed: () {
+                  MaterialPageRoute(builder: (context) => DataPackagePage());
+                },
+              ),
+            )
+          : Container(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
