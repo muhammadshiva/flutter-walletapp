@@ -10,6 +10,9 @@ import 'package:moneywise_app/ui/widgets/home_service_item.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/transaction/transaction_bloc.dart';
+import '../../blocs/user/user_bloc.dart';
+import '../../models/transfer_form_model.dart';
+import 'transfer_amount_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -409,27 +412,38 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                HomeUserItem(
-                  imageUrl: 'assets/img_friend1.png',
-                  username: 'yuanita',
-                ),
-                HomeUserItem(
-                  imageUrl: 'assets/img_friend2.png',
-                  username: 'jani',
-                ),
-                HomeUserItem(
-                  imageUrl: 'assets/img_friend3.png',
-                  username: 'urip',
-                ),
-                HomeUserItem(
-                  imageUrl: 'assets/img_friend4.png',
-                  username: 'masa',
-                ),
-              ],
+          BlocProvider(
+            create: (context) => UserBloc()..add(UserGetRecent()),
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if (state is UserSuccess) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: state.users.map((user) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransferAmountPage(
+                                  data: TransferFormModel(
+                                    sendTo: user.username,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: HomeUserItem(user: user),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ),
         ],

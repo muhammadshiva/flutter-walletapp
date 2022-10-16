@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
 
+import '../../models/user_model.dart';
+
 class HomeUserItem extends StatelessWidget {
+  final UserModel user;
+
   const HomeUserItem({
     Key? key,
-    required this.imageUrl,
-    required this.username,
+    required this.user,
   }) : super(key: key);
-
-  final String imageUrl;
-  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +34,22 @@ class HomeUserItem extends StatelessWidget {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                  imageUrl,
-                ),
+                image: user.profilePicture == null
+                    ? const AssetImage(
+                        'assets/ic_img_error.png',
+                      )
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
           ),
           Text(
-            '@$username',
+            '${user.name}',
             style: blackTextStyle.copyWith(
               fontWeight: medium,
               fontSize: 12,
             ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ],
       ),
