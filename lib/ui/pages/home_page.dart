@@ -9,6 +9,7 @@ import 'package:moneywise_app/ui/widgets/home_user_items.dart';
 import 'package:moneywise_app/ui/widgets/home_service_item.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/tip/tip_bloc.dart';
 import '../../blocs/transaction/transaction_bloc.dart';
 import '../../blocs/user/user_bloc.dart';
 import '../../models/transfer_form_model.dart';
@@ -360,7 +361,7 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 350,
+            height: 395,
             margin: const EdgeInsets.only(top: 14),
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
@@ -465,31 +466,33 @@ class HomePage extends StatelessWidget {
             style: blackTextStyle.copyWith(fontWeight: semiBold, fontSize: 16),
           ),
           const SizedBox(height: 14),
-          Wrap(
-            spacing: 17,
-            runSpacing: 18,
-            children: const [
-              HomeTipsItem(
-                imageUrl: 'assets/img_tips1.png',
-                title: 'Best tips for using a credit card',
-                url: 'https://www.google.com',
-              ),
-              HomeTipsItem(
-                imageUrl: 'assets/img_tips2.png',
-                title: 'Spot the good pie of finance model',
-                url: 'https://www.google.com',
-              ),
-              HomeTipsItem(
-                imageUrl: 'assets/img_tips3.png',
-                title: 'Great hack to get better advices',
-                url: 'https://www.google.com',
-              ),
-              HomeTipsItem(
-                imageUrl: 'assets/img_tips4.png',
-                title: 'Save more penny buy this instead',
-                url: 'https://www.google.com',
-              ),
-            ],
+          BlocProvider(
+            create: (context) => TipBloc()..add(TipGet()),
+            child: BlocBuilder<TipBloc, TipState>(
+              builder: (context, state) {
+                print(state);
+                if (state is TipSuccess) {
+                  return state.tips.isEmpty
+                      ? Text(
+                          'Nantikan tips terbaru dari kami.',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: medium,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      : Wrap(
+                          spacing: 17,
+                          runSpacing: 18,
+                          children: state.tips.map((tip) {
+                            return HomeTipsItem(tip: tip);
+                          }).toList(),
+                        );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           ),
         ],
       ),

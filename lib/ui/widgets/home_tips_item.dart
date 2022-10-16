@@ -2,24 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../models/tip_model.dart';
+
 class HomeTipsItem extends StatelessWidget {
+  final TipModel tip;
+
   const HomeTipsItem({
     Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.url,
+    required this.tip,
   }) : super(key: key);
-
-  final String imageUrl;
-  final String title;
-  final String url;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        if (await canLaunchUrl(Uri.parse(url))) {
-          launchUrl(Uri.parse(url));
+        if (await canLaunchUrl(Uri.parse(tip.url.toString()))) {
+          launchUrl(Uri.parse(tip.url.toString()));
         }
       },
       child: Container(
@@ -35,8 +33,8 @@ class HomeTipsItem extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
-              child: Image.asset(
-                imageUrl,
+              child: Image.network(
+                tip.thumbnail.toString(),
                 width: 155,
                 height: 110,
                 fit: BoxFit.cover,
@@ -46,7 +44,7 @@ class HomeTipsItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
-                title,
+                tip.title.toString(),
                 style: blackTextStyle.copyWith(
                   fontWeight: medium,
                 ),
