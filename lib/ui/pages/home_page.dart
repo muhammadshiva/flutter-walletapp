@@ -9,6 +9,7 @@ import 'package:moneywise_app/ui/widgets/home_user_items.dart';
 import 'package:moneywise_app/ui/widgets/home_service_item.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/transaction/transaction_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -143,7 +144,7 @@ class HomePage extends StatelessWidget {
                       image: DecorationImage(
                         image: state.user.profilePicture == null
                             ? const AssetImage(
-                                'assets/img_profile.png',
+                                'assets/ic_img_error.png',
                               )
                             : NetworkImage(
                                 state.user.profilePicture!,
@@ -356,45 +357,35 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
+            height: 350,
             margin: const EdgeInsets.only(top: 14),
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: whiteColor,
             ),
-            child: Column(
-              children: [
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat1.png',
-                  title: 'Top Up',
-                  time: 'Yesterday',
-                  value: '+ ${formatCurrency(450000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat2.png',
-                  title: 'Cashback',
-                  time: 'Sep 11',
-                  value: '+ ${formatCurrency(22000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat3.png',
-                  title: 'Withdraw',
-                  time: 'Yesterday',
-                  value: '- ${formatCurrency(5000, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat4.png',
-                  title: 'Transfer',
-                  time: 'Aug 27',
-                  value: '- ${formatCurrency(123500, symbol: '')}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat5.png',
-                  title: 'Electric',
-                  time: 'Feb 18',
-                  value: '- ${formatCurrency(12300000, symbol: '')}',
-                ),
-              ],
+            child: BlocProvider(
+              create: (context) => TransactionBloc()..add(TransactionGet()),
+              child: BlocBuilder<TransactionBloc, TransactionState>(
+                builder: (context, state) {
+                  if (state is TransactionSuccess) {
+                    return Scrollbar(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                            children: state.transactions.map((transaction) {
+                          return HomeLatestTransactionItem(
+                              transaction: transaction);
+                        }).toList()),
+                      ),
+                    );
+                  }
+
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ),
           ),
         ],
