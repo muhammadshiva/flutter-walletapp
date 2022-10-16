@@ -470,7 +470,6 @@ class HomePage extends StatelessWidget {
             create: (context) => TipBloc()..add(TipGet()),
             child: BlocBuilder<TipBloc, TipState>(
               builder: (context, state) {
-                print(state);
                 if (state is TipSuccess) {
                   return state.tips.isEmpty
                       ? Text(
