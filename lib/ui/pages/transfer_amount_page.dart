@@ -244,7 +244,6 @@ class _TransferAmountPageState extends State<TransferAmountPage> {
                   title: 'Continue',
                   onPressed: () async {
                     if (await Navigator.pushNamed(context, '/pin') == true) {
-                      // await launchUrl(Uri.parse('https://demo.midtrans.com/'));
                       final authState = context.read<AuthBloc>().state;
 
                       String pin = '';
