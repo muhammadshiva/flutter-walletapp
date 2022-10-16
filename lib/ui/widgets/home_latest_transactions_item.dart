@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:moneywise_app/shared/shared_methods.dart';
 import 'package:moneywise_app/shared/theme.dart';
 
+import '../../models/transaction_model.dart';
+
 class HomeLatestTransactionItem extends StatelessWidget {
+  final TransactionModel transaction;
+
   const HomeLatestTransactionItem({
     Key? key,
-    required this.iconUrl,
-    required this.title,
-    required this.time,
-    required this.value,
+    required this.transaction,
   }) : super(key: key);
-
-  final String iconUrl;
-  final String title;
-  final String time;
-  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +19,22 @@ class HomeLatestTransactionItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 18),
       child: Row(
         children: [
-          Image.asset(
-            iconUrl,
-            width: 48,
-          ),
+          transaction.transactionType!.thumbnail == ''
+              ? Image.asset(
+                  'assets/ic_img_error.png',
+                  width: 48,
+                )
+              : Image.network(
+                  transaction.transactionType!.thumbnail!,
+                  width: 48,
+                ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  transaction.transactionType!.name.toString(),
                   style: blackTextStyle.copyWith(
                     fontWeight: medium,
                     fontSize: 16,
@@ -39,7 +42,8 @@ class HomeLatestTransactionItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  time,
+                  DateFormat('MMM dd')
+                      .format(transaction.createdAt ?? DateTime.now()),
                   style: greyTextStyle.copyWith(
                     fontSize: 12,
                   ),
@@ -48,12 +52,16 @@ class HomeLatestTransactionItem extends StatelessWidget {
             ),
           ),
           Text(
-            value,
+            formatCurrency(
+              transaction.amount ?? 0,
+              symbol: transaction.transactionType?.action == 'cr' ? '+ ' : '- ',
+            ),
             style: blackTextStyle.copyWith(
               fontWeight: medium,
               fontSize: 16,
             ),
           ),
+          const SizedBox(width: 10),
         ],
       ),
     );
