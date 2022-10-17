@@ -16,7 +16,9 @@ import '../../models/transfer_form_model.dart';
 import 'transfer_amount_page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -373,16 +375,27 @@ class HomePage extends StatelessWidget {
               child: BlocBuilder<TransactionBloc, TransactionState>(
                 builder: (context, state) {
                   if (state is TransactionSuccess) {
-                    return Scrollbar(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                            children: state.transactions.map((transaction) {
-                          return HomeLatestTransactionItem(
-                              transaction: transaction);
-                        }).toList()),
-                      ),
-                    );
+                    return state.transactions.isEmpty
+                        ? Center(
+                            child: Text(
+                              'Belum ada transaksi.',
+                              style: blackTextStyle.copyWith(
+                                fontWeight: medium,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        : Scrollbar(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Column(
+                                  children:
+                                      state.transactions.map((transaction) {
+                                return HomeLatestTransactionItem(
+                                    transaction: transaction);
+                              }).toList()),
+                            ),
+                          );
                   }
 
                   return const Center(
@@ -418,28 +431,36 @@ class HomePage extends StatelessWidget {
             child: BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
                 if (state is UserSuccess) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: state.users.map((user) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TransferAmountPage(
-                                  data: TransferFormModel(
-                                    sendTo: user.username,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          child: HomeUserItem(user: user),
+                  return state.users.isEmpty
+                      ? Text(
+                          'Belum ada transfer.',
+                          style: blackTextStyle.copyWith(
+                            fontWeight: medium,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      : SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: state.users.map((user) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TransferAmountPage(
+                                        data: TransferFormModel(
+                                          sendTo: user.username,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: HomeUserItem(user: user),
+                              );
+                            }).toList(),
+                          ),
                         );
-                      }).toList(),
-                    ),
-                  );
                 }
                 return const Center(
                   child: CircularProgressIndicator(),
