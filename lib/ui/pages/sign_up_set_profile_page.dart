@@ -102,7 +102,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Shayana Hanna',
+                    'Upload Photo',
                     style: blackTextStyle.copyWith(
                       fontWeight: medium,
                       fontSize: 18,
