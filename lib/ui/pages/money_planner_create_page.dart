@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
 import 'package:moneywise_app/ui/widgets/forms.dart';
 import 'package:moneywise_app/ui/widgets/money_planner_item_create.dart';
@@ -15,6 +16,48 @@ class MoneyPlannerCreatePage extends StatefulWidget {
 class _MoneyPlannerCreatePageState extends State<MoneyPlannerCreatePage> {
   final planController = TextEditingController(text: '');
   final amountController = TextEditingController(text: '0');
+
+  @override
+  void initState() {
+    super.initState();
+
+    amountController.addListener(() {
+      final text = amountController.text;
+
+      amountController.value = amountController.value.copyWith(
+        text: NumberFormat.currency(
+          locale: 'id',
+          decimalDigits: 0,
+          symbol: '',
+        ).format(
+          int.parse(
+            text.replaceAll('.', ''),
+          ),
+        ),
+      );
+    });
+  }
+
+  addAmount() {
+    if (amountController.text == '0') {
+      amountController.text = '';
+    }
+    setState(() {
+      amountController.text = amountController.text;
+    });
+  }
+
+  deleteAmount() {
+    if (amountController.text.isNotEmpty) {
+      setState(() {
+        amountController.text = amountController.text
+            .substring(0, amountController.text.length - 1);
+        if (amountController.text == '') {
+          amountController.text = '0';
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +122,11 @@ class _MoneyPlannerCreatePageState extends State<MoneyPlannerCreatePage> {
                   style: blackTextStyle.copyWith(fontWeight: medium),
                 ),
                 TextFormField(
-                  controller: amountController,
+                  controller: amountController.text == '0'
+                      ? addAmount()
+                      : amountController.text.isNotEmpty
+                          ? deleteAmount()
+                          : null,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     prefixIcon: Padding(
