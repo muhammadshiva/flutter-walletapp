@@ -79,7 +79,7 @@ class MoneyPlannnerItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Rp ${formatCurrency(amount)}',
+                      formatCurrency(amount),
                       style: blackTextStyle.copyWith(
                         fontWeight: semiBold,
                         fontSize: 12,
