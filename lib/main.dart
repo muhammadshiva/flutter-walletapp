@@ -5,7 +5,9 @@ import 'package:moneywise_app/blocs/user/user_bloc.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/pages/data_provider_page.dart';
 import 'package:moneywise_app/ui/pages/data_success_page.dart';
+import 'package:moneywise_app/ui/pages/history_page.dart';
 import 'package:moneywise_app/ui/pages/home_page.dart';
+import 'package:moneywise_app/ui/pages/money_planner_create_page.dart';
 import 'package:moneywise_app/ui/pages/money_planner_page.dart';
 import 'package:moneywise_app/ui/pages/onboarding_page.dart';
 import 'package:moneywise_app/ui/pages/pin_page.dart';
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => const SignInPage(),
           '/sign-up': (context) => const SignUpPage(),
           '/sign-up-success': (context) => const SignUpSuccessPage(),
-          '/home': (context) => const HomePage(),
+          '/home': (context) => const HomePageNavbar(),
           '/profile': (context) => const ProfilePage(),
           '/pin': (context) => const PinPage(),
           '/profile-edit': (context) => const ProfileEditPage(),
@@ -75,6 +77,8 @@ class MyApp extends StatelessWidget {
           '/data-provider': (context) => const DataProviderPage(),
           '/data-success': (context) => const DataSuccessPage(),
           '/money-planner': (context) => const MoneyPlannerPage(),
+          '/money-planner-create': (context) => const MoneyPlannerCreatePage(),
+          '/history': (context) => const HistoryPage(),
         },
       ),
     );
