@@ -38,8 +38,8 @@ class TransferResultUserItem extends StatelessWidget {
               shape: BoxShape.circle,
               image: DecorationImage(
                 image: user.profilePicture != null
-                    ? const AssetImage('assets/img_profile.png')
-                    : NetworkImage(user.profilePicture!) as ImageProvider,
+                    ? NetworkImage(user.profilePicture!) as ImageProvider
+                    : const AssetImage('assets/img_profile.png'),
               ),
             ),
             child: user.verified == 1
