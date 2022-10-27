@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/shared/shared_methods.dart';
 
 import 'package:moneywise_app/shared/theme.dart';
+import 'package:moneywise_app/ui/pages/history_page.dart';
+import 'package:moneywise_app/ui/pages/money_planner_page.dart';
+import 'package:moneywise_app/ui/pages/profile_page.dart';
 import 'package:moneywise_app/ui/widgets/home_latest_transactions_item.dart';
 import 'package:moneywise_app/ui/widgets/home_tips_item.dart';
 import 'package:moneywise_app/ui/widgets/home_user_items.dart';
@@ -15,10 +18,28 @@ import '../../blocs/user/user_bloc.dart';
 import '../../models/transfer_form_model.dart';
 import 'transfer_amount_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
-    Key? key,
-  }) : super(key: key);
+class HomePageNavbar extends StatefulWidget {
+  const HomePageNavbar({Key? key}) : super(key: key);
+
+  @override
+  _HomePageNavbarState createState() => _HomePageNavbarState();
+}
+
+class _HomePageNavbarState extends State<HomePageNavbar> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    HistoryPage(),
+    MoneyPlannerPage(),
+    ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +72,7 @@ class HomePage extends StatelessWidget {
                 'assets/ic_overview.png',
                 width: 20,
                 height: 20,
-                color: blueColor,
+                color: _selectedIndex == 0 ? blueColor : blackColor,
               ),
               label: 'Overview',
             ),
@@ -60,37 +81,57 @@ class HomePage extends StatelessWidget {
                 'assets/ic_history.png',
                 width: 20,
                 height: 20,
+                color: _selectedIndex == 1 ? blueColor : blackColor,
               ),
               label: 'History',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/ic_statistic.png',
+                'assets/ic_money_plan.png',
                 width: 20,
                 height: 20,
+                color: _selectedIndex == 2 ? blueColor : blackColor,
               ),
-              label: 'Statistic',
+              label: 'Money Planner',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
-                'assets/ic_reward.png',
+                'assets/ic_edit_profile.png',
                 width: 20,
                 height: 20,
+                color: _selectedIndex == 3 ? blueColor : blackColor,
               ),
-              label: 'Reward',
+              label: 'Profile',
             ),
           ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: purpleColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/topup');
+        },
         child: Image.asset(
           'assets/ic_plus_circle.png',
           width: 24,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: _widgetOptions.elementAt(_selectedIndex),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
