@@ -38,6 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         listener: (context, state) {
           if (state is AuthFailed) {
             showCustomSnackbar(context, state.e);
+            debugPrint(state.e);
           }
 
           if (state is AuthCheckEmailSuccess) {

@@ -1,6 +1,8 @@
 // REQUEST FOR AUTHENTICATION
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:moneywise_app/models/signup_form_model.dart';
@@ -10,6 +12,8 @@ import 'package:moneywise_app/shared/shared_values.dart';
 import '../models/signin_form_model.dart';
 
 class AuthService {
+  Dio dio = Dio();
+
   Future<bool> checkEmail(String email) async {
     try {
       final res = await http.post(
@@ -34,8 +38,11 @@ class AuthService {
     try {
       final res = await http.post(
         Uri.parse('$baseUrl/register'),
-        body: data.toJson(),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
       );
+
+      print('TESTING : ${res.statusCode.toString()}');
 
       if (res.statusCode == 200) {
         UserModel user = UserModel.fromJson(jsonDecode(res.body));
@@ -48,9 +55,12 @@ class AuthService {
         throw jsonDecode(res.body)['message'];
       }
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }
+
+  // -------------------------------- LOGIN ---------------------------------//
 
   Future<UserModel> login(SignInFormModel data) async {
     try {
@@ -58,7 +68,7 @@ class AuthService {
         Uri.parse('$baseUrl/login'),
         body: data.toJson(),
       );
-
+      print(res.body);
       if (res.statusCode == 200) {
         UserModel user = UserModel.fromJson(jsonDecode(res.body));
         user = user.copyWith(password: data.password);

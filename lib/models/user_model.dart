@@ -5,7 +5,6 @@ class UserModel {
   final String? name;
   final String? email;
   final String? password;
-
   final String? username;
   final int? verified;
   final String? profilePicture;
