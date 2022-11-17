@@ -255,7 +255,8 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  '**** **** **** ${state.user.cardNumber!.substring(12, 16)}',
+                  '*****',
+                  // '**** **** **** ${state.user.cardNumber!.substring(12, 16)}',
                   style: whiteTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
