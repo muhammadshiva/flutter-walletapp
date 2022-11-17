@@ -14,6 +14,8 @@ class TipService {
         'Authorization': token,
       });
 
+      print(res.body);
+
       if (res.statusCode == 200) {
         return List<TipModel>.from(
           jsonDecode(res.body)['data'].map(
