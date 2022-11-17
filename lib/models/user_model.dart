@@ -34,7 +34,7 @@ class UserModel {
         password: json['password'],
         username: json['username'],
         verified: json['verified'],
-        profilePicture: json['profile_picture'],
+        profilePicture: json['profile_photo_path'],
         balance: json['balance'],
         cardNumber: json['card_number'],
         pin: json['pin'],
