@@ -138,7 +138,7 @@ class HomePage extends StatelessWidget {
           children: [
             buildProfile(context),
             buildWalletCard(),
-            buildLevel(),
+            // buildLevel(),
             buildServices(context),
             buildLatestTransactions(),
             buildSendAgain(),
@@ -255,8 +255,8 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  '*****',
-                  // '**** **** **** ${state.user.cardNumber!.substring(12, 16)}',
+                  // '*****',
+                  '**** **** **** ${state.user.cardNumber!.substring(12, 16)}',
                   style: whiteTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
@@ -369,20 +369,34 @@ class HomePage extends StatelessWidget {
                 },
               ),
               HomeServiceItem(
-                iconUrl: 'assets/ic_withdraw.png',
-                title: 'Withdraw',
-                onTap: () {},
-              ),
-              HomeServiceItem(
-                iconUrl: 'assets/ic_more.png',
-                title: 'More',
+                iconUrl: 'assets/ic_product_data.png',
+                title: 'Data',
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const MoreDialog(),
-                  );
+                  Navigator.pushNamed(context, '/data-provider');
                 },
               ),
+              HomeServiceItem(
+                iconUrl: 'assets/ic_money_plan.png',
+                title: 'Planner',
+                onTap: () {
+                  Navigator.pushNamed(context, '/money-planner');
+                },
+              ),
+              // HomeServiceItem(
+              //   iconUrl: 'assets/ic_withdraw.png',
+              //   title: 'Withdraw',
+              //   onTap: () {},
+              // ),
+              // HomeServiceItem(
+              //   iconUrl: 'assets/ic_more.png',
+              //   title: 'More',
+              //   onTap: () {
+              //     showDialog(
+              //       context: context,
+              //       builder: (context) => const MoreDialog(),
+              //     );
+              //   },
+              // ),
             ],
           ),
         ],
@@ -492,7 +506,7 @@ class HomePage extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (context) => TransferAmountPage(
                                         data: TransferFormModel(
-                                          sendTo: user.username,
+                                          sendTo: user.email,
                                         ),
                                       ),
                                     ),
