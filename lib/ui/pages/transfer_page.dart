@@ -74,7 +74,7 @@ class _TransferPageState extends State<TransferPage> {
                     MaterialPageRoute(
                       builder: (context) => TransferAmountPage(
                         data: TransferFormModel(
-                          sendTo: selectedUser!.username,
+                          sendTo: selectedUser!.email,
                         ),
                       ),
                     ),
@@ -115,7 +115,7 @@ class _TransferPageState extends State<TransferPage> {
                           MaterialPageRoute(
                             builder: (context) => TransferAmountPage(
                               data: TransferFormModel(
-                                sendTo: user.username,
+                                sendTo: user.email,
                               ),
                             ),
                           ),
