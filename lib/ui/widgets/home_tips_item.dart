@@ -29,17 +29,17 @@ class HomeTipsItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-              child: Image.network(
-                tip.thumbnail.toString(),
-                width: 155,
-                height: 110,
-                fit: BoxFit.cover,
-              ),
-            ),
+            // ClipRRect(
+            //   borderRadius: const BorderRadius.vertical(
+            //     top: Radius.circular(20),
+            //   ),
+            //   child: Image.network(
+            //     tip.thumbnail.toString(),
+            //     width: 155,
+            //     height: 110,
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),

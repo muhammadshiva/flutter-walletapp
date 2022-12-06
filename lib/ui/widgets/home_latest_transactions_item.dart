@@ -24,10 +24,14 @@ class HomeLatestTransactionItem extends StatelessWidget {
                   'assets/ic_img_error.png',
                   width: 48,
                 )
-              : Image.network(
-                  transaction.transactionType!.thumbnail!,
+              : Image.asset(
+                  'assets/ic_img_error.png',
                   width: 48,
                 ),
+          // Image.network(
+          //     transaction.transactionType!.thumbnail!,
+          //     width: 48,
+          //   ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
