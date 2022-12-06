@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneywise_app/shared/shared_values.dart';
 import 'package:moneywise_app/shared/theme.dart';
 
 import '../../models/operator_card_model.dart';
@@ -35,7 +36,7 @@ class DataProviderItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.network(
-            operatorCard.thumbnail.toString(),
+            baseImageUrl + operatorCard.thumbnail.toString(),
             height: 30,
           ),
           Column(
