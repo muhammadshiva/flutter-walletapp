@@ -42,7 +42,7 @@ class AuthService {
         body: jsonEncode(data),
       );
 
-      print('TESTING : ${res.statusCode.toString()}');
+      print('REGISTER BODY : ${res.body}');
 
       if (res.statusCode == 200) {
         UserModel user = UserModel.fromJson(jsonDecode(res.body));
