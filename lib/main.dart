@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/blocs/auth/auth_bloc.dart';
+import 'package:moneywise_app/blocs/money_plan/add_money_plan/add_money_plan_bloc.dart';
 import 'package:moneywise_app/blocs/user/user_bloc.dart';
+import 'package:moneywise_app/models/money_plan_form_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/pages/data_provider_page.dart';
 import 'package:moneywise_app/ui/pages/data_success_page.dart';
 import 'package:moneywise_app/ui/pages/history_page.dart';
 import 'package:moneywise_app/ui/pages/home_page.dart';
+import 'package:moneywise_app/ui/pages/money_planner_categories_page.dart';
 import 'package:moneywise_app/ui/pages/money_planner_create_page.dart';
 import 'package:moneywise_app/ui/pages/money_planner_page.dart';
+import 'package:moneywise_app/ui/pages/money_planner_success_page.dart';
 import 'package:moneywise_app/ui/pages/onboarding_page.dart';
 import 'package:moneywise_app/ui/pages/pin_page.dart';
 import 'package:moneywise_app/ui/pages/profile_edit_page.dart';
@@ -39,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AddMoneyPlanBloc(),
         ),
       ],
       child: MaterialApp(
@@ -77,7 +84,11 @@ class MyApp extends StatelessWidget {
           '/data-provider': (context) => const DataProviderPage(),
           '/data-success': (context) => const DataSuccessPage(),
           '/money-planner': (context) => const MoneyPlannerPage(),
-          '/money-planner-create': (context) => const MoneyPlannerCreatePage(),
+          '/money-planner-categories': (context) => MoneyPlannerCategoriesPage(
+                data: MoneyPlanFormModel(),
+              ),
+          '/money-planner-success': (context) =>
+              const MoneyPlannerSuccessPage(),
           '/history': (context) => const HistoryPage(),
         },
       ),
