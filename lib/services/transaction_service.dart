@@ -48,6 +48,8 @@ class TransactionService {
         body: data.toJson(),
       );
 
+      print('TRANSFER : ${res.body}');
+
       if (res.statusCode != 200) {
         throw jsonDecode(res.body)['message'];
       }
@@ -83,12 +85,13 @@ class TransactionService {
       final token = await AuthService().getToken();
 
       final res = await http.get(
-          Uri.parse(
-            '$baseUrl/transactions',
-          ),
-          headers: {
-            'Authorization': token,
-          });
+        Uri.parse(
+          '$baseUrl/transactions',
+        ),
+        headers: {
+          'Authorization': token,
+        },
+      );
 
       if (res.statusCode == 200) {
         return List<TransactionModel>.from(
