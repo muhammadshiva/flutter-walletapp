@@ -19,13 +19,17 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   // CREATE CONTROLLER
   final nameController = TextEditingController(text: '');
+  final usernameController = TextEditingController(text: '');
+
   final emailController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
 
-  bool valiate() {
+  bool validate() {
     if (nameController.text.isEmpty ||
+        usernameController.text.isEmpty ||
         emailController.text.isEmpty ||
-        passwordController.text.isEmpty) {
+        passwordController.text.isEmpty ||
+        passwordController.text.length <= 8) {
       return false;
     }
     return true;
@@ -48,6 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 builder: (context) => SignUpSetProfilePage(
                   data: SignUpFormModel(
                     name: nameController.text,
+                    username: usernameController.text,
                     email: emailController.text,
                     password: passwordController.text,
                   ),
@@ -105,6 +110,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 16,
                       ),
                       CustomFormField(
+                        title: 'Username',
+                        controller: usernameController,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      CustomFormField(
                         title: 'Email Address',
                         controller: emailController,
                       ),
@@ -116,16 +128,37 @@ class _SignUpPageState extends State<SignUpPage> {
                         obscureText: true,
                         controller: passwordController,
                       ),
+                      const SizedBox(height: 5),
+                      passwordController.text.isEmpty
+                          ? Container()
+                          : passwordController.text.length < 7
+                              ? Text(
+                                  'Password minimal 8 karakter',
+                                  style: blackTextStyle.copyWith(
+                                    color: redColor,
+                                    fontSize: 12,
+                                  ),
+                                )
+                              : Container(),
                       const SizedBox(
                         height: 30,
                       ),
                       CustomFilledButton(
                         title: 'Continue',
                         onPressed: () {
-                          if (valiate()) {
-                            context
-                                .read<AuthBloc>()
-                                .add(AuthCheckEmail(emailController.text));
+                          // print(nameController.text);
+                          // print(emailController.text);
+                          // print(passwordController.text);
+
+                          if (passwordController.text.length > 7) {
+                            if (validate()) {
+                              context
+                                  .read<AuthBloc>()
+                                  .add(AuthCheckEmail(emailController.text));
+                            }
+                          } else if (passwordController.text.length < 7) {
+                            showCustomSnackbar(
+                                context, 'Password minimal 8 karakter');
                           } else {
                             showCustomSnackbar(
                                 context, 'Semua field harus diisi');
