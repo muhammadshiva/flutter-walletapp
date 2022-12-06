@@ -37,7 +37,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Photo'),
+        title: const Text('Edit Profile'),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -94,14 +94,16 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     CustomFilledButton(
                       title: 'Update Now',
                       onPressed: () {
-                        context.read<AuthBloc>().add(AuthUpdateUser(
-                              UserEditFormModel(
-                                username: usernameController.text,
-                                name: nameController.text,
-                                email: emailController.text,
-                                password: passwordController.text,
+                        context.read<AuthBloc>().add(
+                              AuthUpdateUser(
+                                UserEditFormModel(
+                                  username: usernameController.text,
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                ),
                               ),
-                            ));
+                            );
                       },
                     ),
                   ],
