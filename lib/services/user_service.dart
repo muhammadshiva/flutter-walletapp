@@ -11,10 +11,17 @@ class UserService {
     try {
       final token = await AuthService().getToken();
 
-      final res = await http
-          .put(Uri.parse('$baseUrl/users'), body: data.toJson(), headers: {
-        'Authorization': token,
-      });
+      final res = await http.put(
+        Uri.parse(
+          '$baseUrl/user',
+        ),
+        body: data.toJson(),
+        headers: {
+          'Authorization': token,
+        },
+      );
+
+      print('EDIT PROFILE : ${res.body}');
 
       if (res.statusCode != 200) {
         throw jsonDecode(res.body)['message'];
@@ -29,7 +36,7 @@ class UserService {
 
     final res = await http.get(
       Uri.parse(
-        '$baseUrl/transfer_histories',
+        '$baseUrl/user',
       ),
       headers: {
         'Authorization': token,
@@ -44,6 +51,8 @@ class UserService {
       );
     }
 
+    print('GET RECENT USER : ${res.body}');
+
     throw jsonDecode(res.body)['message'];
   }
 
@@ -52,7 +61,7 @@ class UserService {
 
     final res = await http.get(
       Uri.parse(
-        '$baseUrl/users/$username',
+        '$baseUrl/user/$username',
       ),
       headers: {
         'Authorization': token,
