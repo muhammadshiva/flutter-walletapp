@@ -7,7 +7,7 @@
 // String baseUrl = 'http://192.168.1.7:8000/api/v1';
 
 String baseUrl =
-    'https://6bde-2001-448a-50a0-58bd-f949-5b68-9864-2e7d.ap.ngrok.io/api/v1';
+    'https://7085-2001-448a-50a0-7549-3cc2-ad11-3a19-4ab1.ap.ngrok.io/api/v1';
 
 String baseImageUrl =
-    'https://6bde-2001-448a-50a0-58bd-f949-5b68-9864-2e7d.ap.ngrok.io/';
+    'https://7085-2001-448a-50a0-7549-3cc2-ad11-3a19-4ab1.ap.ngrok.io/';
