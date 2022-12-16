@@ -518,6 +518,11 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                 }
+
+                if (state is UserFailed) {
+                  debugPrint(
+                      'FAILED LOAD DATA SEND AGAIN : ${state.e.toString()}');
+                }
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
