@@ -32,28 +32,32 @@ class UserService {
   }
 
   Future<List<UserModel>> getRecentUser() async {
-    final token = await AuthService().getToken();
+    try {
+      final token = await AuthService().getToken();
 
-    final res = await http.get(
-      Uri.parse(
-        '$baseUrl/user',
-      ),
-      headers: {
-        'Authorization': token,
-      },
-    );
-
-    if (res.statusCode == 200) {
-      return List<UserModel>.from(
-        jsonDecode(res.body)['data'].map(
-          (user) => UserModel.fromJson(user),
+      final res = await http.get(
+        Uri.parse(
+          '$baseUrl/user',
         ),
+        headers: {
+          'Authorization': token,
+        },
       );
+
+      if (res.statusCode == 200) {
+        return List<UserModel>.from(
+          jsonDecode(res.body)['data'].map(
+            (user) => UserModel.fromJson(user),
+          ),
+        );
+      }
+
+      print('GET RECENT USER : ${res.body}');
+
+      throw jsonDecode(res.body)['message'];
+    } catch (e) {
+      rethrow;
     }
-
-    print('GET RECENT USER : ${res.body}');
-
-    throw jsonDecode(res.body)['message'];
   }
 
   Future<List<UserModel>> getUsersByUsername(String username) async {
