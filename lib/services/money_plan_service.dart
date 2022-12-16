@@ -71,7 +71,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:moneywise_app/api/api_dio.dart';
+//import 'package:moneywise_app/api/api_dio.dart';
 import 'package:moneywise_app/models/money_plan_categories_model.dart';
 import 'package:moneywise_app/models/money_plan_form_model.dart';
 import 'package:moneywise_app/models/money_plan_model.dart';
@@ -79,7 +79,7 @@ import 'package:moneywise_app/services/auth_service.dart';
 import 'package:moneywise_app/shared/shared_values.dart';
 
 class MoneyPlanService {
-  final ApiDio _provider = ApiDio();
+  //final ApiDio _provider = ApiDio();
 
   // FETCH MONEY PLAN CATEGORIES
   Future<List<MoneyPlanCategoriesModel>> getMoneyPlanCategories() async {

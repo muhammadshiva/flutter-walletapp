@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moneywise_app/models/money_plan_model.dart';
 import 'package:moneywise_app/shared/theme.dart';
 import 'package:moneywise_app/ui/widgets/buttons.dart';
-import 'package:moneywise_app/ui/widgets/fetch_condition.dart';
+
 import 'package:moneywise_app/ui/widgets/money_planner_item.dart';
 import 'package:moneywise_app/ui/widgets/money_planner_categories_item.dart';
 
