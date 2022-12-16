@@ -46,23 +46,23 @@ class _MoneyPlannerPageState extends State<MoneyPlannerPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Total Rencana Keuangan',
-                style: blackTextStyle.copyWith(
-                  fontWeight: medium,
-                ),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                'Rp 0',
-                style: blackTextStyle.copyWith(
-                  fontWeight: semiBold,
-                ),
-              ),
-              const SizedBox(height: 17),
-              const Divider(),
+              // Text(
+              //   'Total Rencana Keuangan',
+              //   style: blackTextStyle.copyWith(
+              //     fontWeight: medium,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 2,
+              // ),
+              // Text(
+              //   'Rp 0',
+              //   style: blackTextStyle.copyWith(
+              //     fontWeight: semiBold,
+              //   ),
+              // ),
+              // const SizedBox(height: 17),
+              // const Divider(),
               const SizedBox(height: 17),
               SizedBox(
                 height: 395,
